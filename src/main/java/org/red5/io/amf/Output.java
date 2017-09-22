@@ -522,14 +522,14 @@ public class Output extends BaseOutput implements org.red5.io.object.Output {
      * @return encoded string
      */
     protected static byte[] encodeString(String string) {
-        Element element = getStringCache().get(string);
-        byte[] encoded = (element == null ? null : (byte[]) element.getObjectValue());
-        if (encoded == null) {
+//        Element element = getStringCache().get(string);
+//        byte[] encoded = (element == null ? null : (byte[]) element.getObjectValue());
+//        if (encoded == null) {
             ByteBuffer buf = AMF.CHARSET.encode(string);
-            encoded = new byte[buf.limit()];
+            byte[] encoded= new byte[buf.limit()];
             buf.get(encoded);
-            getStringCache().put(new Element(string, encoded));
-        }
+//            getStringCache().put(new Element(string, encoded));
+//        }
         return encoded;
     }
 

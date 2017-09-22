@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.red5</groupId>
         <artifactId>red5-parent</artifactId>
-        <version>1.0.10-M4</version>
+        <version>1.0.10-M4.android</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>red5-io</artifactId>
@@ -352,6 +352,11 @@
             <artifactId>hamcrest-junit</artifactId>
             <version>2.0.0.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.mina</groupId>
+            <artifactId>mina-core</artifactId>
+            <version>2.0.16</version>
         </dependency>
     </dependencies>
 </project>
