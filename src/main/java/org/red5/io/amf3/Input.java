@@ -27,12 +27,14 @@ import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.SortedSet;
@@ -741,7 +743,8 @@ public class Input extends org.red5.io.amf.Input implements org.red5.io.object.I
                 refStorage.classReferences.add(new ClassReference(className, AMF3.TYPE_OBJECT_VALUE, attributes));
                 // create props
                 properties = new ObjectMap<>();
-                for (String key : attributes) {
+                List<String> attrs = attributes == null ? Collections.emptyList() : attributes;
+                for (String key : attrs) {
                     if (log.isDebugEnabled()) {
                         log.debug("Looking for property: {}", key);
                     }
@@ -797,10 +800,11 @@ public class Input extends org.red5.io.amf.Input implements org.red5.io.object.I
         amf3_mode -= 1;
         if (result == null) {
             // Create result object based on classname
+            Set<Entry<String, Object>> entrySet = properties == null ? Collections.emptySet() : properties.entrySet();
             if ("".equals(className)) {
                 // "anonymous" object, load as Map
                 // Resolve circular references
-                for (Map.Entry<String, Object> entry : properties.entrySet()) {
+                for (Map.Entry<String, Object> entry : entrySet) {
                     if (entry.getValue() == pending) {
                         entry.setValue(properties);
                     }
@@ -820,7 +824,7 @@ public class Input extends org.red5.io.amf.Input implements org.red5.io.object.I
                     storeReference(tempRefId, result);
                     Class resultClass = result.getClass();
                     pending.resolveProperties(result);
-                    for (Map.Entry<String, Object> entry : properties.entrySet()) {
+                    for (Map.Entry<String, Object> entry : entrySet) {
                         // Resolve circular references
                         final String key = entry.getKey();
                         Object value = entry.getValue();

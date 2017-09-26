@@ -81,7 +81,8 @@ public class DOM2Writer {
                 out.print(node.getNodeName());
                 if (node.hasAttributes()) {
                     NamedNodeMap attrs = node.getAttributes();
-                    int len = (attrs != null) ? attrs.getLength() : 0;
+                    if (attrs != null) {
+                    int len = attrs.getLength();
                     for (int a = 0; a < len; a++) {
                         Attr attr = (Attr) attrs.item(a);
                         out.print(' ');
@@ -89,6 +90,7 @@ public class DOM2Writer {
                         out.print("=\"");
                         out.print(attr.getValue());
                         out.print('\"');
+                    }
                     }
                 }
                 children = node.getChildNodes();

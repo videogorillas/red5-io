@@ -165,6 +165,7 @@ public class M4AReader implements IoConstants, ITagReader {
         if (null == f) {
             log.warn("Reader was passed a null file");
             log.debug("{}", ToStringBuilder.reflectionToString(this));
+            throw new IllegalArgumentException("M4AReader was passed a null file");
         }
         String fileName = f.getName();
         if (fileName.endsWith("m4a") || fileName.endsWith("mp4")) {

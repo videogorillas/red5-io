@@ -280,6 +280,11 @@ public class MP3Stream extends PushbackInputStream {
                 arr = BIT_RATE_MPEG2_L2;
             }
         }
+        if (arr == null) {
+            throw new IllegalArgumentException(
+                    String.format("unhandled arguments passed to calculateBitRate mpegVer: %d layer %d code %d",
+                            mpegVer, layer, code));
+        }
         return arr[code];
     }
 
