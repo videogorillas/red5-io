@@ -186,6 +186,7 @@ public class FLVReader implements IoConstants, ITagReader, IKeyFrameDataAnalyzer
         if (null == channel) {
             log.warn("Reader was passed a null channel");
             log.debug("{}", org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString(this));
+            throw new IllegalArgumentException("FLVReader was passed a null channel");
         }
         if (!channel.isOpen()) {
             log.warn("Reader was passed a closed channel");

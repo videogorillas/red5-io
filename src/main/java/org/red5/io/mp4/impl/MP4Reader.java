@@ -264,6 +264,7 @@ public class MP4Reader implements IoConstants, ITagReader, IKeyFrameDataAnalyzer
         if (null == f) {
             log.warn("Reader was passed a null file");
             log.debug("{}", ToStringBuilder.reflectionToString(this));
+            throw new IllegalArgumentException("MP4Reader was passed a null file");
         }
         if (f.exists() && f.canRead()) {
             // create a datasource / channel
